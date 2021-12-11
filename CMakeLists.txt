@@ -24,7 +24,7 @@ else()
 	include_directories(${CMAKE_INSTALL_PREFIX}/include/eigen3)
 endif()
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native -O3 -mavx -ffast-math")
 
 add_subdirectory(src)
 add_subdirectory(python)
