@@ -15,8 +15,8 @@
 #include <limits>
 #include "immintrin.h"
 
-#include "avx_utils.hpp"
-#include "eigen_utils.hpp"
+#include "utils/avx_utils.hpp"
+#include "utils/eigen_utils.hpp"
 
 
 // ================================================================ in cpp
