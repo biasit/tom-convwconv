@@ -31,10 +31,10 @@ class MithralMatmul {
         nnz_per_centroid(lut_work_const > 0 ?
             lut_work_const * D / ncodebooks : D),
         idxs(ncodebooks, nnz_per_centroid),
-        amm(N_padded, D, M, ncodebooks, centroids.data(),
-            splitdims.data(), splitvals.data(),
-            encode_scales.data(), encode_offsets.data(),
-            idxs.data(), nnz_per_centroid),
+        // amm(N_padded, D, M, ncodebooks, centroids.data(),
+        //     splitdims.data(), splitvals.data(),
+        //     encode_scales.data(), encode_offsets.data(),
+        //     idxs.data(), nnz_per_centroid),
         X(N_padded, D),
         Q(D, M)
     {
@@ -67,23 +67,23 @@ class MithralMatmul {
         Q.setRandom();
     }
 
-    void encode() { amm.encode(X.data()); }
-    void lut() { amm.lut(Q.data()); }
-    void scan() { amm.scan(); }
+    // void encode() { amm.encode(X.data()); }
+    // void lut() { amm.lut(Q.data()); }
+    // void scan() { amm.scan(); }
 
-    void run_matmul(bool create_lut=true) {
-        encode();
-        if (create_lut) {
-            lut();
-        }
-        scan();
-    }
+    // void run_matmul(bool create_lut=true) {
+    //     encode();
+    //     if (create_lut) {
+    //         lut();
+    //     }
+    //     scan();
+    // }
 
-    const Eigen::Matrix<uint16_t, Eigen::Dynamic, Eigen::Dynamic, Eigen::ColMajor>& output() const { return amm.out_mat; }
+    // const Eigen::Matrix<uint16_t, Eigen::Dynamic, Eigen::Dynamic, Eigen::ColMajor>& output() const { return amm.out_mat; }
 
     // stuff we pass into the amm object (would be learned during training)
     int N_padded;
-    Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic, Eigen::ColMajor> centriods;
+    Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic, Eigen::ColMajor> centroids;
     int nsplits;
     Eigen::Matrix<uint32_t, 1, Eigen::Dynamic, Eigen::RowMajor> splitdims;
     Eigen::Matrix<int8_t, Eigen::Dynamic, Eigen::Dynamic, Eigen::ColMajor> splitvals;
@@ -93,9 +93,13 @@ class MithralMatmul {
     Eigen::Matrix<int, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> idxs;
 
     // amm object
-    mithral_amm<float> amm;
+    // mithral_amm<float> amm;
 
     // random data
     Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic, Eigen::ColMajor> X;
     Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic, Eigen::ColMajor> Q;
+
+    int get_npadded() {
+        return N_padded;
+    }
 };

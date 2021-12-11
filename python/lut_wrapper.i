@@ -7,7 +7,7 @@
 %{
 #define SWIG_FILE_WITH_INIT
 #include <Python.h>
-#include "lut_amm.cpp"
+#include "lut_amm.hpp"
 %}
 
 // typemaps.i is a built-in swig interface that lets us map c++ types to other
@@ -25,4 +25,4 @@
 %eigen_typemaps(Eigen::Matrix<uint32_t, 1, Eigen::Dynamic, Eigen::RowMajor>)
 
 // Tell swig to build bindings for everything in our library
-%include "lut_amm.cpp"
+%include "lut_amm.hpp"

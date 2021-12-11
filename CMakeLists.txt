@@ -24,6 +24,7 @@ else()
 	include_directories(${CMAKE_INSTALL_PREFIX}/include/eigen3)
 endif()
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native")
 
 add_subdirectory(src)
 add_subdirectory(python)
