@@ -67,17 +67,17 @@ class MithralMatmul {
         Q.setRandom();
     }
 
-    void encode() { amm.encode(X.data()); }
-    void lut() { amm.lut(Q.data()); }
-    void scan() { amm.scan(); }
+    // void encode() { amm.encode(X.data()); }
+    // void lut() { amm.lut(Q.data()); }
+    // void scan() { amm.scan(); }
 
-    void run_matmul(bool create_lut=true) {
-        encode();
-        if (create_lut) {
-            lut();
-        }
-        scan();
-    }
+    // void run_matmul(bool create_lut=true) {
+    //     encode();
+    //     if (create_lut) {
+    //         lut();
+    //     }
+    //     scan();
+    // }
 
     const Eigen::Matrix<uint16_t, Eigen::Dynamic, Eigen::Dynamic, Eigen::ColMajor>& output() const { return amm.out_mat; }
 
