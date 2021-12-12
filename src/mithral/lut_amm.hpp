@@ -31,10 +31,10 @@ class MithralMatmul {
             nnz_per_centroid(lut_work_const > 0 ?
                 lut_work_const * D / ncodebooks : D),
             idxs(ncodebooks, nnz_per_centroid),
-            amm(N_padded, D, M, ncodebooks, centroids.data(),
-                splitdims.data(), splitvals.data(),
-                encode_scales.data(), encode_offsets.data(),
-                idxs.data(), nnz_per_centroid),
+            // amm(N_padded, D, M, ncodebooks, centroids.data(),
+            //     splitdims.data(), splitvals.data(),
+            //     encode_scales.data(), encode_offsets.data(),
+            //     idxs.data(), nnz_per_centroid),
             X(N_padded, D),
             Q(D, M)
         {
@@ -67,13 +67,13 @@ class MithralMatmul {
             Q.setRandom();
         }
 
-        void run_matmul(bool create_lut=true) {
-            encode();
-            if (create_lut) {
-                lut();
-            }
-            scan();
-        }
+        // void run_matmul(bool create_lut=true) {
+        //     encode();
+        //     if (create_lut) {
+        //         lut();
+        //     }
+        //     scan();
+        // }
 
         const Eigen::Matrix<uint16_t, Eigen::Dynamic, Eigen::Dynamic, Eigen::ColMajor>& output() const { return amm.out_mat; }
 
@@ -92,11 +92,19 @@ class MithralMatmul {
         Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic, Eigen::ColMajor> X;
         Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic, Eigen::ColMajor> Q;
 
+        void set_X(Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic, Eigen::ColMajor> setX) {
+            X = setX;
+        }
+
+        void set_Q(Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic, Eigen::ColMajor> setQ) {
+            Q = setQ;
+        }
+
     private:
         // amm object
-        mithral_amm<float> amm;
+        // mithral_amm<float> amm;
 
-        void encode() { amm.encode(X.data()); }
-        void lut() { amm.lut(Q.data()); }
-        void scan() { amm.scan(); }
+        // void encode() { amm.encode(X.data()); }
+        // void lut() { amm.lut(Q.data()); }
+        // void scan() { amm.scan(); }
 };
