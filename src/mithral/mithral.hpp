@@ -94,6 +94,8 @@ struct mithral_amm {
     static constexpr int scan_block_nrows = 32;
     static constexpr int lut_sz = 16;
 
+    mithral_amm() {}
+
     // NxD matrix @ DxM matrix
     mithral_amm(int N, int D, int M, int ncodebooks, const float* centroids,
                 // for encoding

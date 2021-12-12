@@ -20,9 +20,11 @@
 // Eigen matrices into Numpy arrays.
 %include <eigen.i>
 
+%eigen_typemaps(Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>)
+%eigen_typemaps(Eigen::Matrix<int8_t, Eigen::Dynamic, Eigen::Dynamic, Eigen::ColMajor>)
+%eigen_typemaps(Eigen::Matrix<float, 1, Eigen::Dynamic, Eigen::RowMajor>)
 %eigen_typemaps(Eigen::Matrix<int, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>)
-%eigen_typemaps(Eigen::Matrix<int, Eigen::Dynamic, Eigen::Dynamic, Eigen::ColMajor>)
-%eigen_typemaps(Eigen::Matrix<uint32_t, 1, Eigen::Dynamic, Eigen::RowMajor>)
+
 
 // Tell swig to build bindings for everything in our library
 %include "lut_amm.hpp"

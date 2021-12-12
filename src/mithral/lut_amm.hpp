@@ -31,10 +31,10 @@ class MithralMatmul {
         nnz_per_centroid(lut_work_const > 0 ?
             lut_work_const * D / ncodebooks : D),
         idxs(ncodebooks, nnz_per_centroid),
-        amm(N_padded, D, M, ncodebooks, centroids.data(),
-            splitdims.data(), splitvals.data(),
-            encode_scales.data(), encode_offsets.data(),
-            idxs.data(), nnz_per_centroid),
+        // amm(N_padded, D, M, ncodebooks, centroids.data(),
+        //     splitdims.data(), splitvals.data(),
+        //     encode_scales.data(), encode_offsets.data(),
+        //     idxs.data(), nnz_per_centroid),
         X(N_padded, D),
         Q(D, M)
     {
@@ -93,7 +93,7 @@ class MithralMatmul {
     Eigen::Matrix<int, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> idxs;
 
     // amm object
-    mithral_amm<float> amm;
+    // mithral_amm<float> amm;
 
     // random data
     Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic, Eigen::ColMajor> X;
