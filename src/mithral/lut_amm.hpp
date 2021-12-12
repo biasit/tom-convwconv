@@ -75,7 +75,7 @@ class MithralMatmul {
         //     scan();
         // }
 
-        const Eigen::Matrix<uint16_t, Eigen::Dynamic, Eigen::Dynamic, Eigen::ColMajor>& output() const { return amm.out_mat; }
+        // const Eigen::Matrix<uint16_t, Eigen::Dynamic, Eigen::Dynamic, Eigen::ColMajor>& output() const { return amm.out_mat; }
 
         // stuff we pass into the amm object (would be learned during training)
         int N_padded;
