@@ -67,19 +67,19 @@ class MithralMatmul {
         Q.setRandom();
     }
 
-    // void encode() { amm.encode(X.data()); }
-    // void lut() { amm.lut(Q.data()); }
-    // void scan() { amm.scan(); }
+    void encode() { amm.encode(X.data()); }
+    void lut() { amm.lut(Q.data()); }
+    void scan() { amm.scan(); }
 
-    // void run_matmul(bool create_lut=true) {
-    //     encode();
-    //     if (create_lut) {
-    //         lut();
-    //     }
-    //     scan();
-    // }
+    void run_matmul(bool create_lut=true) {
+        encode();
+        if (create_lut) {
+            lut();
+        }
+        scan();
+    }
 
-    // const Eigen::Matrix<uint16_t, Eigen::Dynamic, Eigen::Dynamic, Eigen::ColMajor>& output() const { return amm.out_mat; }
+    const Eigen::Matrix<uint16_t, Eigen::Dynamic, Eigen::Dynamic, Eigen::ColMajor>& output() const { return amm.out_mat; }
 
     // stuff we pass into the amm object (would be learned during training)
     int N_padded;
@@ -98,8 +98,4 @@ class MithralMatmul {
     // random data
     Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic, Eigen::ColMajor> X;
     Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic, Eigen::ColMajor> Q;
-
-    Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic, Eigen::ColMajor> get_npadded() {
-        return X;
-    }
 };
