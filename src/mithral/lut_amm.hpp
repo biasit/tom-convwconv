@@ -31,10 +31,10 @@ class MithralMatmul {
             nnz_per_centroid(lut_work_const > 0 ?
                 lut_work_const * D / ncodebooks : D),
             idxs(ncodebooks, nnz_per_centroid),
-            // amm(N_padded, D, M, ncodebooks, centroids.data(),
-            //     splitdims.data(), splitvals.data(),
-            //     encode_scales.data(), encode_offsets.data(),
-            //     idxs.data(), nnz_per_centroid),
+            amm(N_padded, D, M, ncodebooks, centroids.data(),
+                splitdims.data(), splitvals.data(),
+                encode_scales.data(), encode_offsets.data(),
+                idxs.data(), nnz_per_centroid),
             X(N_padded, D),
             Q(D, M)
         {
@@ -67,15 +67,15 @@ class MithralMatmul {
             Q.setRandom();
         }
 
-        // void run_matmul(bool create_lut=true) {
-        //     encode();
-        //     if (create_lut) {
-        //         lut();
-        //     }
-        //     scan();
-        // }
+        void run_matmul(bool create_lut=true) {
+            encode();
+            if (create_lut) {
+                lut();
+            }
+            scan();
+        }
 
-        // const Eigen::Matrix<uint16_t, Eigen::Dynamic, Eigen::Dynamic, Eigen::ColMajor>& output() const { return amm.out_mat; }
+        const Eigen::Matrix<uint16_t, Eigen::Dynamic, Eigen::Dynamic, Eigen::ColMajor>& output() const { return amm.out_mat; }
 
         // stuff we pass into the amm object (would be learned during training)
         int N_padded;
@@ -100,11 +100,10 @@ class MithralMatmul {
             Q = setQ;
         }
 
-    private:
         // amm object
-        // mithral_amm<float> amm;
+        mithral_amm<float> amm;
 
-        // void encode() { amm.encode(X.data()); }
-        // void lut() { amm.lut(Q.data()); }
-        // void scan() { amm.scan(); }
+        void encode() { amm.encode(X.data()); }
+        void lut() { amm.lut(Q.data()); }
+        void scan() { amm.scan(); }
 };
